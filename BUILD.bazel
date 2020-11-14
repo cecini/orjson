@@ -21,6 +21,7 @@ pyo3_extension(
     # ls cargo/remote/ -l|awk -F. '{print $2}'|grep -v bazel|awk -F- '{print "\"//cargo:"$1"\","}'|grep -v "o:\""
     # should use the crates.bzl ,not in the remote
     deps = [
+        "//cargo:associative_cache",
         "//cargo:bytecount",
         "//cargo:encoding_rs",
         "//cargo:inlinable_string",
