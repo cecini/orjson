@@ -37,7 +37,8 @@ data_attr = "glob([\"src/**\"])"
 associative-cache = { version = "1" }
 bytecount = { git = "https://github.com/ijl/orjson.git", tag = "3.4.3", features = ["generic-simd", "runtime-dispatch-simd"]  }
 #reqwest = { git = "https://github.com/ankitects/reqwest.git", tag = "anki-2020-11-03", default-features = false, features = ["json", "socks"] }
-encoding_rs = { git = "https://github.com/ijl/orjson.git", tag = "3.4.3", default_features = false  }
+encoding_rs = { git = "https://github.com/ijl/orjson.git", tag = "3.4.3", default_features = false }
+#encoding_rs = { git = "https://github.com/ijl/orjson.git", tag = "3.4.3", default_features = false, features = ["simd-accel"] }
 inlinable_string = { version = "0.1" }
 itoa = { version = "0.4", default_features = false }
 once_cell = { version = "1", default_features = false }
@@ -48,3 +49,5 @@ serde_json = { git = "https://github.com/ijl/orjson.git", tag = "3.4.3", default
 smallvec = { version = "1", default_features = false, features = ["const_generics", "union", "specialization", "write"] }
 wyhash = { version = "0.4" }
 
+[target.'cfg(any(target_arch = "x86_64", target_arch = "aarch64", target_arch = "i686", target_arch = "armv7"))'.dependencies]
+encoding_rs = { git = "https://github.com/ijl/orjson.git", tag = "3.4.3", default_features = false, features = ["simd-accel"] }
