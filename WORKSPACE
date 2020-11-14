@@ -48,6 +48,9 @@ rust_repositories(
 load("@io_bazel_rules_rust//:workspace.bzl", "bazel_version")
 
 bazel_version(name = "bazel_version")
+#bazel_version(name = "io_bazel_rules_rust_bazel_version")
+
+# setup python3 toolchain 
 
 ##############
 # PyO3 Rules #
@@ -68,3 +71,7 @@ load("@rules_pyo3//cargo:crates.bzl", "rules_pyo3_fetch_remote_crates")
 
 rules_pyo3_fetch_remote_crates()
 
+
+# local raze rust depend
+load("@//cargo:crates.bzl", "raze_fetch_remote_crates")
+raze_fetch_remote_crates()
