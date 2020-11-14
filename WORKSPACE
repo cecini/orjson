@@ -53,7 +53,11 @@ git_repository(
     shallow_since = "1605340443 +0000",
 )
 
+load("@io_bazel_rules_rust//:workspace.bzl", "rust_workspace")
+
+rust_workspace()
 
 load("@rules_pyo3//cargo:crates.bzl", "rules_pyo3_fetch_remote_crates")
 
 rules_pyo3_fetch_remote_crates()
+
