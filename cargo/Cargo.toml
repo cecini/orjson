@@ -21,6 +21,8 @@ targets = [
 ]
 genmode = "Remote"
 default_gen_buildrs = true
+#output_buildfile_suffix = "BUILD.bazel"
+
 
 #[package.metadata.raze.crates.pyo3.'*']
 #data_attr = "glob([\"**\"])"
