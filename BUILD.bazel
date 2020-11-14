@@ -1,13 +1,95 @@
 load("@rules_python//python:defs.bzl", "py_test")
 load("@rules_pyo3//:build_defs.bzl", "pyo3_extension")
+load("@io_bazel_rules_rust//cargo:cargo_build_script.bzl", "cargo_build_script")
 
 py_test(
     name = "uses_my_ext",
     srcs = ["uses_my_ext.py"],
     deps = [":my_ext"],
 )
+cargo_build_script(
+    name = "build_script",
+    srcs = ["build.rs"],
+)
 
 pyo3_extension(
-    name = "my_ext",
-    srcs = ["my_ext.rs"],
+    #name: The name of the resulting `py_library`
+    name = "orjson",
+    # no pyo3 dep, have in the @rules_pyo3//:pyo3 
+    # ls cargo/remote/ -l|awk -F. '{print $2}'|grep -v bazel|awk -F- '{print "\"//cargo:"$1"\","}'|grep -v "o:\""
+    deps = [
+        "//cargo:associative",
+        "//cargo:bitflags",
+        "//cargo:bytecount",
+        "//cargo:cfg",
+        "//cargo:encoding_rs",
+        "//cargo:inlinable_string",
+        "//cargo:itoa",
+        "//cargo:lexical",
+        "//cargo:libm",
+        "//cargo:once_cell",
+        "//cargo:packed_simd_2",
+        "//cargo:rand_core",
+        "//cargo:ryu",
+        "//cargo:serde",
+        "//cargo:serde_json",
+        "//cargo:smallvec",
+        "//cargo:static_assertions",
+        "//cargo:wyhash",
+		    ],
+    # expose py_library
+    visibility = ["//visibility:public"], 
+    # other args pass to rust_library, but what pass to py_library?
+    #srcs = glob(["src/*.rs"]),
+    #srcs = glob(["**/*.rs"]),
+    srcs = glob(["src/**"]),
+    data = glob(["**"]),
 )
+# py_library data import deps 
+
+#load("@io_bazel_rules_rust//rust:rust.bzl", "rust_library", "rust_test")
+#load("@io_bazel_rules_rust//cargo:cargo_build_script.bzl", "cargo_build_script")
+#load("@bazel_skylib//lib:selects.bzl", "selects")
+#load("//rslib:rustfmt.bzl", "rustfmt_fix", "rustfmt_test")
+
+# create pyo3 extension
+#rust_library(
+#    name = "rsbridge",
+#    srcs = ["lib.rs"],
+#    crate_type = "cdylib",
+#    rustc_flags = selects.with_or({
+#        (
+#            "@io_bazel_rules_rust//rust/platform:x86_64-apple-darwin",
+#        ): [
+#            "-Clink-arg=-undefined",
+#            "-Clink-arg=dynamic_lookup",
+#            "-Clink-arg=-mmacosx-version-min=10.7",
+#        ],
+#        "//conditions:default": [],
+#    }),
+#    visibility = [
+#        "//pylib:__subpackages__",
+#    ],
+#    deps = [
+#        ":build_script",
+#        # use the raze target
+#        "//cargo:pyo3",
+         # this the orign rslib ,but i not use as dep ,direct use it .
+#        "//rslib:anki",
+#	# not use the Cargo.toml
+#    ],
+#)
+
+#rustfmt_test(
+#    name = "format_check",
+#    srcs = glob([
+#        "*.rs",
+#    ]),
+#)
+
+#rustfmt_fix(
+#    name = "format",
+#    srcs = glob([
+#        "*.rs",
+#    ]),
+#)
