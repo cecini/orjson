@@ -10,6 +10,7 @@ py_test(
 cargo_build_script(
     name = "build_script",
     srcs = ["build.rs"],
+    #crate_root = "build.rs",
 )
 
 pyo3_extension(
@@ -35,8 +36,20 @@ pyo3_extension(
     # other args pass to rust_library, but what pass to py_library?
     #srcs = glob(["src/*.rs"]),
     #srcs = glob(["**/*.rs"]),
+    # If srcs contains more than one file, then there must be a file either named lib.rs,
+    # Otherwise, crate_root must be set to the source file that is the root of the crate to be passed to rustc to build this crate.
     srcs = glob(["src/**"]),
     data = glob(["**"]),
+
+    #rules_pyo3 have set this crate_type
+    #crate_type = "cdylib",    #crate_type = "lib",
+
+    #crate_features = [
+    #],
+    # ofcouse  
+    crate_root = "src/lib.rs",
+    edition = "2018",
+    version="3.4.3",
 )
 # py_library data import deps 
 
