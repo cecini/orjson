@@ -55,7 +55,7 @@ bazel_version(name = "bazel_version")
 
 git_repository(
     name = "rules_pyo3",
-    commit = "f91a5e63e3e8ef6ef3b95748b775e5b7a470c6fa"
+    commit = "f91a5e63e3e8ef6ef3b95748b775e5b7a470c6fa",
     remote = "https://github.com/cecini/rules_pyo3",
     shallow_since = "1605340443 +0000",
 )
