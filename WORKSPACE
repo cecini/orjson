@@ -1,6 +1,8 @@
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 load("@bazel_tools//tools/build_defs/repo:git.bzl", "git_repository", "new_git_repository")
 # Todo: abstarct this set for common use
+# first self dep
+# then dep's dep such pyo3'dep 
 ################
 # Python Rules #
 ################
