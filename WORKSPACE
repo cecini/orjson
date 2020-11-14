@@ -58,9 +58,9 @@ bazel_version(name = "bazel_version")
 
 git_repository(
     name = "rules_pyo3",
-    commit = "f91a5e63e3e8ef6ef3b95748b775e5b7a470c6fa",
+    commit = "304d8974fa41e37e8ad3e32b9cb1221ecc9bb985",
     remote = "https://github.com/cecini/rules_pyo3",
-    shallow_since = "1605340443 +0000",
+    shallow_since = "1605383653 +0000",
 )
 
 load("@io_bazel_rules_rust//:workspace.bzl", "rust_workspace")

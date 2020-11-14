@@ -33,6 +33,7 @@ pyo3_extension(
         "//cargo:smallvec",
         "//cargo:wyhash",
 		    ],
+
     # expose py_library
     visibility = ["//visibility:public"], 
     # other args pass to rust_library, but what pass to py_library?
