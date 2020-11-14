@@ -17,24 +17,17 @@ pyo3_extension(
     name = "orjson",
     # no pyo3 dep, have in the @rules_pyo3//:pyo3 
     # ls cargo/remote/ -l|awk -F. '{print $2}'|grep -v bazel|awk -F- '{print "\"//cargo:"$1"\","}'|grep -v "o:\""
+    # should use the crates.bzl ,not in the remote
     deps = [
-        "//cargo:associative",
-        "//cargo:bitflags",
         "//cargo:bytecount",
-        "//cargo:cfg",
         "//cargo:encoding_rs",
         "//cargo:inlinable_string",
         "//cargo:itoa",
-        "//cargo:lexical",
-        "//cargo:libm",
         "//cargo:once_cell",
-        "//cargo:packed_simd_2",
-        "//cargo:rand_core",
         "//cargo:ryu",
         "//cargo:serde",
         "//cargo:serde_json",
         "//cargo:smallvec",
-        "//cargo:static_assertions",
         "//cargo:wyhash",
 		    ],
     # expose py_library
