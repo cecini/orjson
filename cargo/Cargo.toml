@@ -1,0 +1,33 @@
+[package]
+name = "dummy"
+version = "0.0.0"
+edition = "2018"
+
+[lib]
+name = "orjson"
+path = "src/lib.rs"
+
+[package.metadata.raze]
+workspace_path = "//cargo"
+targets = [
+    "i686-apple-darwin",
+    "i686-pc-windows-msvc",
+    "i686-unknown-linux-gnu",
+    "x86_64-apple-darwin",
+    "x86_64-apple-ios",
+    "x86_64-pc-windows-msvc",
+    "x86_64-unknown-linux-gnu",
+    "aarch64-apple-ios",
+]
+genmode = "Remote"
+default_gen_buildrs = true
+
+[package.metadata.raze.crates.pyo3.'*']
+data_attr = "glob([\"**\"])"
+
+[package.metadata.raze.crates.ring.'*']
+data_attr = "glob([\"src/**\"])"
+
+[package.metadata.raze.crates.webpki.'*']
+data_attr = "glob([\"src/**\"])"
+
