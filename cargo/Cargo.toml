@@ -34,6 +34,7 @@ data_attr = "glob([\"src/**\"])"
 data_attr = "glob([\"src/**\"])"
 
 [dependencies]
+rand_core = { version = "0.5", features = ["std"] } 
 associative-cache = { version = "1" }
 bytecount = { git = "https://github.com/ijl/orjson.git", tag = "3.4.3", features = ["generic-simd", "runtime-dispatch-simd"]  }
 #reqwest = { git = "https://github.com/ankitects/reqwest.git", tag = "anki-2020-11-03", default-features = false, features = ["json", "socks"] }

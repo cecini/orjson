@@ -49,6 +49,15 @@ def raze_fetch_remote_crates():
 
     maybe(
         http_archive,
+        name = "raze__getrandom__0_1_15",
+        url = "https://crates.io/api/v1/crates/getrandom/0.1.15/download",
+        type = "tar.gz",
+        strip_prefix = "getrandom-0.1.15",
+        build_file = Label("//cargo/remote:BUILD.getrandom-0.1.15.bazel"),
+    )
+
+    maybe(
+        http_archive,
         name = "raze__inlinable_string__0_1_11",
         url = "https://crates.io/api/v1/crates/inlinable_string/0.1.11/download",
         type = "tar.gz",
@@ -63,6 +72,15 @@ def raze_fetch_remote_crates():
         type = "tar.gz",
         strip_prefix = "itoa-0.4.6",
         build_file = Label("//cargo/remote:BUILD.itoa-0.4.6.bazel"),
+    )
+
+    maybe(
+        http_archive,
+        name = "raze__libc__0_2_80",
+        url = "https://crates.io/api/v1/crates/libc/0.2.80/download",
+        type = "tar.gz",
+        strip_prefix = "libc-0.2.80",
+        build_file = Label("//cargo/remote:BUILD.libc-0.2.80.bazel"),
     )
 
     maybe(
@@ -135,6 +153,15 @@ def raze_fetch_remote_crates():
         type = "tar.gz",
         strip_prefix = "smallvec-1.4.2",
         build_file = Label("//cargo/remote:BUILD.smallvec-1.4.2.bazel"),
+    )
+
+    maybe(
+        http_archive,
+        name = "raze__wasi__0_9_0_wasi_snapshot_preview1",
+        url = "https://crates.io/api/v1/crates/wasi/0.9.0+wasi-snapshot-preview1/download",
+        type = "tar.gz",
+        strip_prefix = "wasi-0.9.0+wasi-snapshot-preview1",
+        build_file = Label("//cargo/remote:BUILD.wasi-0.9.0+wasi-snapshot-preview1.bazel"),
     )
 
     maybe(
