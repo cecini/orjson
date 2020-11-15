@@ -36,6 +36,9 @@ rust_library(
     name = "itoa",
     srcs = glob(["**/*.rs"]),
     crate_features = [
+        "default",
+        "i128",
+        "std",
     ],
     crate_root = "src/lib.rs",
     crate_type = "lib",

@@ -41,7 +41,7 @@ bytecount = { git = "https://github.com/ijl/orjson.git", tag = "3.4.3", features
 encoding_rs = { git = "https://github.com/ijl/orjson.git", tag = "3.4.3", default_features = false }
 #encoding_rs = { git = "https://github.com/ijl/orjson.git", tag = "3.4.3", default_features = false, features = ["simd-accel"] }
 inlinable_string = { version = "0.1" }
-itoa = { version = "0.4", default_features = false }
+itoa = { version = "0.4", default_features = true, features = ["std", "i128"] }
 once_cell = { version = "1"}
 #pyo3 = { version = "0.12", default_features = false, features = ["extension-module"]}
 ryu = { version = "1" }
