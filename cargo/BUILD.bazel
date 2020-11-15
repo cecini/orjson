@@ -112,6 +112,15 @@ alias(
 )
 
 alias(
+    name = "syn",
+    actual = "@raze__syn__1_0_48//:syn",
+    tags = [
+        "cargo-raze",
+        "manual",
+    ],
+)
+
+alias(
     name = "wyhash",
     actual = "@raze__wyhash__0_4_2//:wyhash",
     tags = [
