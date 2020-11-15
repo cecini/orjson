@@ -112,6 +112,24 @@ def raze_fetch_remote_crates():
 
     maybe(
         http_archive,
+        name = "raze__proc_macro2__1_0_24",
+        url = "https://crates.io/api/v1/crates/proc-macro2/1.0.24/download",
+        type = "tar.gz",
+        strip_prefix = "proc-macro2-1.0.24",
+        build_file = Label("//cargo/remote:BUILD.proc-macro2-1.0.24.bazel"),
+    )
+
+    maybe(
+        http_archive,
+        name = "raze__quote__1_0_7",
+        url = "https://crates.io/api/v1/crates/quote/1.0.7/download",
+        type = "tar.gz",
+        strip_prefix = "quote-1.0.7",
+        build_file = Label("//cargo/remote:BUILD.quote-1.0.7.bazel"),
+    )
+
+    maybe(
+        http_archive,
         name = "raze__rand_core__0_5_1",
         url = "https://crates.io/api/v1/crates/rand_core/0.5.1/download",
         type = "tar.gz",
@@ -139,6 +157,15 @@ def raze_fetch_remote_crates():
 
     maybe(
         http_archive,
+        name = "raze__serde_derive__1_0_117",
+        url = "https://crates.io/api/v1/crates/serde_derive/1.0.117/download",
+        type = "tar.gz",
+        strip_prefix = "serde_derive-1.0.117",
+        build_file = Label("//cargo/remote:BUILD.serde_derive-1.0.117.bazel"),
+    )
+
+    maybe(
+        http_archive,
         name = "raze__serde_json__1_0_59",
         url = "https://crates.io/api/v1/crates/serde_json/1.0.59/download",
         type = "tar.gz",
@@ -153,6 +180,24 @@ def raze_fetch_remote_crates():
         type = "tar.gz",
         strip_prefix = "smallvec-1.4.2",
         build_file = Label("//cargo/remote:BUILD.smallvec-1.4.2.bazel"),
+    )
+
+    maybe(
+        http_archive,
+        name = "raze__syn__1_0_48",
+        url = "https://crates.io/api/v1/crates/syn/1.0.48/download",
+        type = "tar.gz",
+        strip_prefix = "syn-1.0.48",
+        build_file = Label("//cargo/remote:BUILD.syn-1.0.48.bazel"),
+    )
+
+    maybe(
+        http_archive,
+        name = "raze__unicode_xid__0_2_1",
+        url = "https://crates.io/api/v1/crates/unicode-xid/0.2.1/download",
+        type = "tar.gz",
+        strip_prefix = "unicode-xid-0.2.1",
+        build_file = Label("//cargo/remote:BUILD.unicode-xid-0.2.1.bazel"),
     )
 
     maybe(

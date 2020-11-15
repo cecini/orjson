@@ -35,18 +35,17 @@ load(
 )
 
 cargo_build_script(
-    name = "serde_build_script",
+    name = "proc_macro2_build_script",
     srcs = glob(["**/*.rs"]),
     build_script_env = {
     },
     crate_features = [
-        "derive",
-        "serde_derive",
-        "std",
+        "default",
+        "proc-macro",
     ],
     crate_root = "build.rs",
     data = glob(["**"]),
-    edition = "2015",
+    edition = "2018",
     rustc_flags = [
         "--cap-lints=allow",
     ],
@@ -54,26 +53,22 @@ cargo_build_script(
         "cargo-raze",
         "manual",
     ],
-    version = "1.0.117",
+    version = "1.0.24",
     visibility = ["//visibility:private"],
     deps = [
     ],
 )
 
 rust_library(
-    name = "serde",
+    name = "proc_macro2",
     srcs = glob(["**/*.rs"]),
     crate_features = [
-        "derive",
-        "serde_derive",
-        "std",
+        "default",
+        "proc-macro",
     ],
     crate_root = "src/lib.rs",
     crate_type = "lib",
-    edition = "2015",
-    proc_macro_deps = [
-        "@raze__serde_derive__1_0_117//:serde_derive",
-    ],
+    edition = "2018",
     rustc_flags = [
         "--cap-lints=allow",
     ],
@@ -81,9 +76,20 @@ rust_library(
         "cargo-raze",
         "manual",
     ],
-    version = "1.0.117",
+    version = "1.0.24",
     # buildifier: leave-alone
     deps = [
-        ":serde_build_script",
+        ":proc_macro2_build_script",
+        "@raze__unicode_xid__0_2_1//:unicode_xid",
     ],
 )
+
+# Unsupported target "comments" with type "test" omitted
+
+# Unsupported target "features" with type "test" omitted
+
+# Unsupported target "marker" with type "test" omitted
+
+# Unsupported target "test" with type "test" omitted
+
+# Unsupported target "test_fmt" with type "test" omitted
