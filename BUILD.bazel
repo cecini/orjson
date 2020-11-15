@@ -2,12 +2,6 @@ load("@rules_python//python:defs.bzl", "py_test")
 load("@rules_pyo3//:build_defs.bzl", "pyo3_extension")
 load("@io_bazel_rules_rust//cargo:cargo_build_script.bzl", "cargo_build_script")
 
-py_test(
-    name = "test_orjson",
-    srcs = ["testor.py"],
-    main = "testor.py",
-    deps = [":orjson"],
-)
 cargo_build_script(
     name = "build_script",
     srcs = ["build.rs"],
@@ -54,6 +48,12 @@ pyo3_extension(
     edition = "2018",
     version="3.4.3",
     #tags = ["
+)
+py_test(
+    name = "test_orjson",
+    srcs = ["testor.py"],
+    main = "testor.py",
+    deps = [":orjson"],
 )
 # py_library data import deps 
 
