@@ -34,3 +34,7 @@ load("@//cargo:crates.bzl", "raze_fetch_remote_crates")
 raze_fetch_remote_crates()
 
 # setup python3 toolchain 
+load(":python.bzl", "setup_local_python")
+setup_local_python(name = "python")
+#native.register_toolchains("@python//:python3_toolchain")
+register_toolchains("@python//:python3_toolchain")
