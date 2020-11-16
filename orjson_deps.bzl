@@ -38,7 +38,8 @@ def orjson_deps():
     maybe(
         git_repository,
         name = "rules_pyo3",
-        commit = "304d8974fa41e37e8ad3e32b9cb1221ecc9bb985",
+        #commit = "304d8974fa41e37e8ad3e32b9cb1221ecc9bb985",
+	commit = "e05ab56eb313e75329c8461a1b9a4f772a0af739",
         remote = "https://github.com/cecini/rules_pyo3",
     )
 

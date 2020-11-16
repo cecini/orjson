@@ -47,6 +47,7 @@ pyo3_extension(
     crate_root = "src/lib.rs",
     edition = "2018",
     version="3.4.3",
+    
     #tags = ["
 )
 py_test(
