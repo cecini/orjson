@@ -1,23 +1,19 @@
 #import pdb;pdb.set_trace()
 # should not put when using run bazel 
-import gc 
 #gc.set_debug(gc.DEBUG_LEAK)
-gc.disable()
 import tracemalloc
 tracemalloc.start(25)
-gc.enable()
+#import pdb;pdb.set_trace()
+#if 'dev' in sys._xoptions:
+#    import gc
+#    gc.enable_object_debugger(100)
+#    gc.set_threshold(5)
+#import gc
+#gc.enable_object_debugger(100)
+#gc.set_threshold(5)
 import orjson
-gc.disable()
 
-import time
-# PYTHONMALLOCSTATS=1
-# PYTHONTRACEMALLOC=25
-print("I have loaeded the orjson library")
-
-time.sleep(2)
 print("I have slept 10s, exit, done!")
-#gc.set_debug(gc.DEBUG_LEAK)
-#to_json_bytes = orjson.dumps
-orjson.dumps([])
-
+#orjson.dumps()
+#orjson.dumps([])
 print("I have done!")
