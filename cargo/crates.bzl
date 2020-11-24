@@ -13,11 +13,29 @@ def raze_fetch_remote_crates():
     """This function defines a collection of repos and should be called in a WORKSPACE file"""
     maybe(
         http_archive,
+        name = "raze__arrayvec__0_5_2",
+        url = "https://crates.io/api/v1/crates/arrayvec/0.5.2/download",
+        type = "tar.gz",
+        strip_prefix = "arrayvec-0.5.2",
+        build_file = Label("//cargo/remote:BUILD.arrayvec-0.5.2.bazel"),
+    )
+
+    maybe(
+        http_archive,
         name = "raze__associative_cache__1_0_1",
         url = "https://crates.io/api/v1/crates/associative-cache/1.0.1/download",
         type = "tar.gz",
         strip_prefix = "associative-cache-1.0.1",
         build_file = Label("//cargo/remote:BUILD.associative-cache-1.0.1.bazel"),
+    )
+
+    maybe(
+        http_archive,
+        name = "raze__bitflags__1_2_1",
+        url = "https://crates.io/api/v1/crates/bitflags/1.2.1/download",
+        type = "tar.gz",
+        strip_prefix = "bitflags-1.2.1",
+        build_file = Label("//cargo/remote:BUILD.bitflags-1.2.1.bazel"),
     )
 
     maybe(
@@ -58,11 +76,11 @@ def raze_fetch_remote_crates():
 
     maybe(
         http_archive,
-        name = "raze__inlinable_string__0_1_11",
-        url = "https://crates.io/api/v1/crates/inlinable_string/0.1.11/download",
+        name = "raze__inlinable_string__0_1_13",
+        url = "https://crates.io/api/v1/crates/inlinable_string/0.1.13/download",
         type = "tar.gz",
-        strip_prefix = "inlinable_string-0.1.11",
-        build_file = Label("//cargo/remote:BUILD.inlinable_string-0.1.11.bazel"),
+        strip_prefix = "inlinable_string-0.1.13",
+        build_file = Label("//cargo/remote:BUILD.inlinable_string-0.1.13.bazel"),
     )
 
     maybe(
@@ -72,6 +90,15 @@ def raze_fetch_remote_crates():
         type = "tar.gz",
         strip_prefix = "itoa-0.4.6",
         build_file = Label("//cargo/remote:BUILD.itoa-0.4.6.bazel"),
+    )
+
+    maybe(
+        http_archive,
+        name = "raze__lexical_core__0_7_4",
+        url = "https://crates.io/api/v1/crates/lexical-core/0.7.4/download",
+        type = "tar.gz",
+        strip_prefix = "lexical-core-0.7.4",
+        build_file = Label("//cargo/remote:BUILD.lexical-core-0.7.4.bazel"),
     )
 
     maybe(
@@ -165,30 +192,39 @@ def raze_fetch_remote_crates():
     )
 
     maybe(
-        http_archive,
-        name = "raze__serde_json__1_0_59",
-        url = "https://crates.io/api/v1/crates/serde_json/1.0.59/download",
-        type = "tar.gz",
-        strip_prefix = "serde_json-1.0.59",
-        build_file = Label("//cargo/remote:BUILD.serde_json-1.0.59.bazel"),
+        new_git_repository,
+        name = "raze__serde_json__1_0_53",
+        remote = "https://github.com/ijl/orjson.git",
+        commit = "417e40e6fcc3d5203f7e0824074b57a5c6497a49",
+        build_file = Label("//cargo/remote:BUILD.serde_json-1.0.53.bazel"),
+        init_submodules = True,
     )
 
     maybe(
         http_archive,
-        name = "raze__smallvec__1_4_2",
-        url = "https://crates.io/api/v1/crates/smallvec/1.4.2/download",
+        name = "raze__smallvec__1_5_0",
+        url = "https://crates.io/api/v1/crates/smallvec/1.5.0/download",
         type = "tar.gz",
-        strip_prefix = "smallvec-1.4.2",
-        build_file = Label("//cargo/remote:BUILD.smallvec-1.4.2.bazel"),
+        strip_prefix = "smallvec-1.5.0",
+        build_file = Label("//cargo/remote:BUILD.smallvec-1.5.0.bazel"),
     )
 
     maybe(
         http_archive,
-        name = "raze__syn__1_0_48",
-        url = "https://crates.io/api/v1/crates/syn/1.0.48/download",
+        name = "raze__static_assertions__1_1_0",
+        url = "https://crates.io/api/v1/crates/static_assertions/1.1.0/download",
         type = "tar.gz",
-        strip_prefix = "syn-1.0.48",
-        build_file = Label("//cargo/remote:BUILD.syn-1.0.48.bazel"),
+        strip_prefix = "static_assertions-1.1.0",
+        build_file = Label("//cargo/remote:BUILD.static_assertions-1.1.0.bazel"),
+    )
+
+    maybe(
+        http_archive,
+        name = "raze__syn__1_0_50",
+        url = "https://crates.io/api/v1/crates/syn/1.0.50/download",
+        type = "tar.gz",
+        strip_prefix = "syn-1.0.50",
+        build_file = Label("//cargo/remote:BUILD.syn-1.0.50.bazel"),
     )
 
     maybe(

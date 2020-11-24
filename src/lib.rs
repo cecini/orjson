@@ -19,6 +19,7 @@ use pyo3::ffi::*;
 use std::borrow::Cow;
 use std::os::raw::c_char;
 use std::ptr::NonNull;
+use ::std::intrinsics::breakpoint;
 
 const DUMPS_DOC: &str =
     "dumps(obj, /, default=None, option=None)\n--\n\nSerialize Python objects to JSON.\0";

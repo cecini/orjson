@@ -35,7 +35,7 @@ load(
 )
 
 cargo_build_script(
-    name = "serde_derive_build_script",
+    name = "bitflags_build_script",
     srcs = glob(["**/*.rs"]),
     build_script_env = {
     },
@@ -52,20 +52,20 @@ cargo_build_script(
         "cargo-raze",
         "manual",
     ],
-    version = "1.0.117",
+    version = "1.2.1",
     visibility = ["//visibility:private"],
     deps = [
     ],
 )
 
 rust_library(
-    name = "serde_derive",
+    name = "bitflags",
     srcs = glob(["**/*.rs"]),
     crate_features = [
         "default",
     ],
     crate_root = "src/lib.rs",
-    crate_type = "proc-macro",
+    crate_type = "lib",
     edition = "2015",
     rustc_flags = [
         "--cap-lints=allow",
@@ -74,12 +74,9 @@ rust_library(
         "cargo-raze",
         "manual",
     ],
-    version = "1.0.117",
+    version = "1.2.1",
     # buildifier: leave-alone
     deps = [
-        ":serde_derive_build_script",
-        "@raze__proc_macro2__1_0_24//:proc_macro2",
-        "@raze__quote__1_0_7//:quote",
-        "@raze__syn__1_0_50//:syn",
+        ":bitflags_build_script",
     ],
 )

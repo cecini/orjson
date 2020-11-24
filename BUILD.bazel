@@ -1,6 +1,8 @@
 load("@rules_python//python:defs.bzl", "py_test")
-load("@rules_pyo3//:build_defs.bzl", "pyo3_extension")
+load("@rules_pyo3_repo//:build_defs.bzl", "pyo3_extension")
 load("@io_bazel_rules_rust//cargo:cargo_build_script.bzl", "cargo_build_script")
+
+load("@debug_deps//:requirements.bzl", "requirement")
 
 cargo_build_script(
     name = "build_script",
@@ -30,6 +32,8 @@ pyo3_extension(
 
     # expose py_library
     visibility = ["//visibility:public"], 
+    # init file for py_library 
+    init = "__init__.py",
     # other args pass to rust_library, but what pass to py_library?
     #srcs = glob(["src/*.rs"]),
     #srcs = glob(["**/*.rs"]),
@@ -47,6 +51,20 @@ pyo3_extension(
     crate_root = "src/lib.rs",
     edition = "2018",
     version="3.4.3",
+    #rustc_flags = ["-C codegen-units=256", 
+    rustc_flags = ["-Ccodegen-units=256", 
+		   "-Cdebug-assertions=yes",
+		   "-Cdebuginfo=2", 
+		   "-Cforce-frame-pointers=yes" ,
+		   "-Cincremental=y",
+		   "-Copt-level=0",
+		   "-Coverflow-checks=y",
+		   "-Cpanic=unwind", 
+		   "-Crpath=no" ,
+		   "-Clto=no",
+		   "-Cforce-unwind-tables=yes",
+		  ]
+
     
     #tags = ["
 )
@@ -54,7 +72,11 @@ py_test(
     name = "test_orjson",
     srcs = ["testor.py"],
     main = "testor.py",
-    deps = [":orjson"],
+    deps = [":orjson",
+            requirement("pympler"),
+	    ],
+    python_version ="PY3",
+    #toolchians = ["@python//:python3_toolchain"],
 )
 # py_library data import deps 
 

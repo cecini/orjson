@@ -41,7 +41,7 @@ alias(
 
 alias(
     name = "inlinable_string",
-    actual = "@raze__inlinable_string__0_1_11//:inlinable_string",
+    actual = "@raze__inlinable_string__0_1_13//:inlinable_string",
     tags = [
         "cargo-raze",
         "manual",
@@ -95,7 +95,7 @@ alias(
 
 alias(
     name = "serde_json",
-    actual = "@raze__serde_json__1_0_59//:serde_json",
+    actual = "@raze__serde_json__1_0_53//:serde_json",
     tags = [
         "cargo-raze",
         "manual",
@@ -104,7 +104,7 @@ alias(
 
 alias(
     name = "smallvec",
-    actual = "@raze__smallvec__1_4_2//:smallvec",
+    actual = "@raze__smallvec__1_5_0//:smallvec",
     tags = [
         "cargo-raze",
         "manual",
@@ -113,7 +113,7 @@ alias(
 
 alias(
     name = "syn",
-    actual = "@raze__syn__1_0_48//:syn",
+    actual = "@raze__syn__1_0_50//:syn",
     tags = [
         "cargo-raze",
         "manual",

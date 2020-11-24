@@ -4,6 +4,7 @@ use crate::ffi::PyBytesObject;
 use core::ptr::NonNull;
 use pyo3::ffi::*;
 use std::os::raw::c_char;
+// use ::std::intrinsics::breakpoint;
 
 pub struct BytesWriter {
     cap: usize,
@@ -43,6 +44,7 @@ impl BytesWriter {
 
     #[inline]
     pub fn resize(&mut self, len: isize) {
+        // unsafe { breakpoint() };
         unsafe {
             _PyBytes_Resize(
                 &mut self.bytes as *mut *mut PyBytesObject as *mut *mut PyObject,

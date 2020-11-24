@@ -25,19 +25,20 @@ package(default_visibility = [
 ])
 
 licenses([
-    "notice",  # Apache-2.0 from expression "Apache-2.0 OR MIT"
+    "notice",  # MIT from expression "MIT OR Apache-2.0"
 ])
 
 # Generated Targets
 
 rust_library(
-    name = "inlinable_string",
+    name = "serde_json",
     srcs = glob(["**/*.rs"]),
     crate_features = [
+        "std",
     ],
-    crate_root = "src/lib.rs",
+    crate_root = "json/src/lib.rs",
     crate_type = "lib",
-    edition = "2015",
+    edition = "2018",
     rustc_flags = [
         "--cap-lints=allow",
     ],
@@ -45,8 +46,24 @@ rust_library(
         "cargo-raze",
         "manual",
     ],
-    version = "0.1.11",
+    version = "1.0.53",
     # buildifier: leave-alone
     deps = [
+        "@raze__itoa__0_4_6//:itoa",
+        "@raze__lexical_core__0_7_4//:lexical_core",
+        "@raze__ryu__1_0_5//:ryu",
+        "@raze__serde__1_0_117//:serde",
     ],
 )
+
+# Unsupported target "compiletest" with type "test" omitted
+
+# Unsupported target "debug" with type "test" omitted
+
+# Unsupported target "map" with type "test" omitted
+
+# Unsupported target "regression" with type "test" omitted
+
+# Unsupported target "stream" with type "test" omitted
+
+# Unsupported target "test" with type "test" omitted

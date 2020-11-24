@@ -1,4 +1,4 @@
-workspace(name = "orjson")
+workspace(name = "orjson_repo")
 
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 load("@bazel_tools//tools/build_defs/repo:git.bzl", "git_repository", "new_git_repository")
@@ -24,7 +24,7 @@ load("@io_bazel_rules_rust//:workspace.bzl", "rust_workspace")
 rust_workspace()
 
 
-load("@rules_pyo3//cargo:crates.bzl", "rules_pyo3_fetch_remote_crates")
+load("@rules_pyo3_repo//cargo:crates.bzl", "rules_pyo3_fetch_remote_crates")
 rules_pyo3_fetch_remote_crates()
 
 
@@ -38,3 +38,12 @@ load(":python.bzl", "setup_local_python")
 setup_local_python(name = "python")
 #native.register_toolchains("@python//:python3_toolchain")
 register_toolchains("@python//:python3_toolchain")
+
+
+load("@rules_python//python:pip.bzl", "pip_install")
+pip_install(   # or pip3_import
+    name = "debug_deps",
+    requirements = "//:debug/requirements.txt",
+    python_interpreter_target = "@python//:python",
+    timeout = 600,
+ )
