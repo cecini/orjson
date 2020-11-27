@@ -7,7 +7,10 @@ def _impl(rctx):
         fail("python3.9 or python.exe not found on path")
 
     #path = "/usr/local/python39nodebug/bin/python3.9" 
-    path = "/usr/local/python39release/bin/python3.9"
+    #path = "/usr/local/python39release/bin/python3.9"
+    # valgrind with release
+    #path = "/usr/local/python39valgrind/bin/python3.9"
+    path = "/usr/local/python39valgrindwithdebug/bin/python3.9"
     rctx.symlink(path, "python")
     rctx.file("BUILD.bazel", """
 load("@rules_python//python:defs.bzl", "py_runtime_pair")

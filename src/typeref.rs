@@ -125,7 +125,7 @@ unsafe fn look_up_json_exc() -> *mut PyObject {
     Py_DECREF(ptr);
     Py_DECREF(module_dict);
     Py_DECREF(module);
-    res
+    std::ptr::null_mut() 
 }
 
 #[cold]
@@ -182,7 +182,7 @@ unsafe fn look_up_enum_type() -> *mut PyTypeObject {
         as *mut PyTypeObject;
     Py_DECREF(module_dict);
     Py_DECREF(module);
-    ptr
+    std::ptr::null_mut() 
 }
 
 #[cold]
@@ -194,7 +194,7 @@ unsafe fn look_up_uuid_type() -> *mut PyTypeObject {
     Py_DECREF(uuid);
     Py_DECREF(uuid_mod_dict);
     Py_DECREF(uuid_mod);
-    ptr
+    std::ptr::null_mut() 
 }
 
 #[cold]

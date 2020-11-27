@@ -3,7 +3,7 @@
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 load("@bazel_tools//tools/build_defs/repo:git.bzl", "git_repository", "new_git_repository")
 load("@bazel_tools//tools/build_defs/repo:utils.bzl", "maybe")
-#load("@rules_python//python:pip.bzl", "pip_install")
+load("@rules_python//python:pip.bzl", "pip_install")
 
 
 def orjson_deps():
@@ -22,9 +22,9 @@ def orjson_deps():
     maybe(
         git_repository,
         name = "io_bazel_rules_rust",
-        commit = "a364ded42d9788144cd26b6e98d6b4038753bfa9",
+        commit = "504cde54248f518d5c98eb9f1e8db3546904ecb2",
         remote = "https://github.com/ankitects/rules_rust",
-        shallow_since = "1604550071 +1000",
+        shallow_since = "1606199575 +1000",
     )
 
     maybe(
@@ -47,4 +47,11 @@ def orjson_deps():
   #      remote = "https://github.com/cecini/rules_pyo3",
   #  )
 
+    # pip_install have maybe 
+    pip_install(   # or pip3_import
+        name = "debug_deps",
+	requirements = "@orjson_repo//:debug/requirements.txt",
+        python_interpreter_target = "@python//:python",
+        timeout = 600,
+    )
 

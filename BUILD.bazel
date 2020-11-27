@@ -17,17 +17,17 @@ pyo3_extension(
     # ls cargo/remote/ -l|awk -F. '{print $2}'|grep -v bazel|awk -F- '{print "\"//cargo:"$1"\","}'|grep -v "o:\""
     # should use the crates.bzl ,not in the remote
     deps = [
-        "//cargo:associative_cache",
-        "//cargo:bytecount",
-        "//cargo:encoding_rs",
-        "//cargo:inlinable_string",
-        "//cargo:itoa",
-        "//cargo:once_cell",
-        "//cargo:ryu",
-        "//cargo:serde",
-        "//cargo:serde_json",
-        "//cargo:smallvec",
-        "//cargo:wyhash",
+        "//cargo/cargo:associative_cache",
+	"//cargo/cargo:bytecount",
+	"//cargo/cargo:encoding_rs",
+	"//cargo/cargo:inlinable_string",
+	"//cargo/cargo:itoa",
+	"//cargo/cargo:once_cell",
+	"//cargo/cargo:ryu",
+	"//cargo/cargo:serde",
+	"//cargo/cargo:serde_json",
+	"//cargo/cargo:smallvec",
+	"//cargo/cargo:wyhash",
 		    ],
 
     # expose py_library
@@ -40,7 +40,7 @@ pyo3_extension(
     # If srcs contains more than one file, then there must be a file either named lib.rs,
     # Otherwise, crate_root must be set to the source file that is the root of the crate to be passed to rustc to build this crate.
     srcs = glob(["src/**"]),
-    data = glob(["**"]),
+    data = glob(["**"], exclude = ["test/**"]),
 
     #rules_pyo3 have set this crate_type
     #crate_type = "cdylib",    #crate_type = "lib",
