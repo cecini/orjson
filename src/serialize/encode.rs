@@ -19,6 +19,8 @@ use crate::unicode::*;
 use serde::ser::{Serialize, SerializeMap, SerializeSeq, Serializer};
 use std::io::Write;
 use std::ptr::NonNull;
+use pyo3::ffi::*;
+use std::fmt;
 
 pub const RECURSION_LIMIT: u8 = 255;
 
@@ -29,25 +31,31 @@ pub fn serialize(
 ) -> Result<NonNull<pyo3::ffi::PyObject>, String> {
     let mut buf = BytesWriter::new();
     let obtype = pyobject_to_obtype(ptr, opts);
+    unsafe { let _n: isize = Py_REFCNT(buf.bytes.cast::<PyObject>()); println!("beforebufresize{}",_n);}
     match obtype {
         ObType::List | ObType::Dict | ObType::Dataclass | ObType::NumpyArray => {
             buf.resize(1024);
         }
         _ => {}
     }
+    unsafe { let _n: isize = Py_REFCNT(buf.bytes.cast::<PyObject>()); println!("afterbufresizeandbeforebufprefetch{}",_n);}
     buf.prefetch();
+    unsafe { let _n: isize = Py_REFCNT(buf.bytes.cast::<PyObject>()); println!("afterprefetch{}",_n);}
     let obj = PyObjectSerializer::with_obtype(ptr, obtype, opts, 0, 0, default);
+    unsafe { let _n: isize = Py_REFCNT(buf.bytes.cast::<PyObject>()); println!("aftercreateobj{}",_n);}
     let res;
     if likely!(opts & INDENT_2 != INDENT_2) {
         res = serde_json::to_writer(&mut buf, &obj);
     } else {
         res = serde_json::to_writer_pretty(&mut buf, &obj);
     }
+    unsafe { let _n: isize = Py_REFCNT(buf.bytes.cast::<PyObject>()); println!("afterjsonwrite{}",_n);}
     match res {
         Ok(_) => {
             if opts & APPEND_NEWLINE != 0 {
                 buf.write(b"\n").unwrap();
             }
+            unsafe { let _n: isize = Py_REFCNT(buf.bytes.cast::<PyObject>()); println!("beforebuffinish{}",_n);}
             Ok(buf.finish())
         }
         Err(err) => {

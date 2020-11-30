@@ -5,11 +5,12 @@ use core::ptr::NonNull;
 use pyo3::ffi::*;
 use std::os::raw::c_char;
 // use ::std::intrinsics::breakpoint;
+use std::fmt;
 
 pub struct BytesWriter {
     cap: usize,
     len: usize,
-    bytes: *mut PyBytesObject,
+    pub bytes: *mut PyBytesObject,
 }
 
 impl BytesWriter {
@@ -27,6 +28,33 @@ impl BytesWriter {
     pub fn finish(&mut self) -> NonNull<PyObject> {
         unsafe {
             (*self.bytes.cast::<PyVarObject>()).ob_size = self.len as Py_ssize_t;
+      //       // let _n: isize = Py_REFCNT(self.bytes.cast::<PyObject>()); println!("resizebeforsetobsize{}",_n);
+      //      let _n: isize = Py_REFCNT(self.bytes.cast::<PyObject>()); println!("setobsizeinfinishbefor{}",_n);
+      //      (*self.bytes).ob_size = self.len as isize;
+      //       // // why must exsit!!
+      //       // let _n: isize = Py_REFCNT(self.bytes.cast::<PyObject>()); println!("resizeaftersetobsize{}",_n);
+      //      let _n: isize = Py_REFCNT(self.bytes.cast::<PyObject>()); println!("setobsizeinfinisafter{}",_n);
+      //      // Py_DECREF(self.bytes.cast::<PyObject>());
+
+      //      // Py_REFCNT = 1
+      //      // no inpact
+      //      // (*self.bytes).ob_refcnt = 1 as isize;
+      //      (*self.bytes.cast::<PyObject>()).ob_refcnt = 1 as isize;
+      //      // set_refcnt
+      //      // let  Py_REFCNT(self.bytes.cast::<PyObject>()) = 1 as iszie;
+      //       // // why must exsit!!
+
+            
+      //      // // Py_SET_SIZE(self.bytes.cast::<PyVarObject>(), self.len as Py_ssize_t);
+
+      //      // comp mode ,change pyo3 
+      //      // Py_SET_SIZE(self.bytes.cast::<PyVarObject>(), self.len as isize);
+      //      // let _n: isize = Py_REFCNT(self.bytes.cast::<PyObject>()); println!("resizeafterpysetsize{}",_n);
+     
+      //      // Py_SIZE(self.bytes.cast::<PyObject>()) = self.len as isize;
+      //      // (*(ob as *mut PyVarObject)).ob_size
+
+      //      let _n: isize = Py_REFCNT(self.bytes.cast::<PyObject>()); println!("resizeinfinishbefordecrefafter{}",_n);
             self.resize(self.len as isize);
             NonNull::new_unchecked(self.bytes as *mut PyObject)
         }
@@ -35,10 +63,26 @@ impl BytesWriter {
     #[inline]
     fn buffer_ptr(&self) -> *mut u8 {
         unsafe {
+
             std::mem::transmute::<&[c_char; 1], *mut u8>(
                 &(*self.bytes.cast::<PyBytesObject>()).ob_sval,
             )
             .offset(self.len as isize)
+          // let res: *mut u8 = std::mem::transmute::<&[c_char; 1], *mut u8>(
+           //     &(*self.bytes.cast::<PyBytesObject>()).ob_sval,
+           // )
+           // .offset(self.len as isize);
+            
+
+            // let n: isize = Py_REFCNT(*mut self.bytes as mut PyBytesObject as mut PyObject);
+            // let n: isize = Py_REFCNT(self.bytes as PyObject);
+            // let n: isize = Py_REFCNT(* self.bytes);
+            // let n: isize = Py_REFCNT(self.bytes as PyObject);
+           // let n: isize = Py_REFCNT(self.bytes.0.get());
+            //let _n: isize = Py_REFCNT(self.bytes.cast::<PyObject>());
+            //let mut un : u8 = 2;
+            //&mut un
+           // res 
         }
     }
 
@@ -46,10 +90,16 @@ impl BytesWriter {
     pub fn resize(&mut self, len: isize) {
         // unsafe { breakpoint() };
         unsafe {
+            // let _n: isize = Py_REFCNT(self.bytes.cast::<PyObject>());
+            let _n: isize = Py_REFCNT(self.bytes.cast::<PyObject>()); println!("resizebefor{}",_n);
+            // int _PyBytes_Resize(PyObject **bytes, Py_ssize_t newsize)¶
+
             _PyBytes_Resize(
                 &mut self.bytes as *mut *mut PyBytesObject as *mut *mut PyObject,
                 len as isize,
             );
+            // maybe null here, have gone 
+            // let _n: isize = Py_REFCNT(self.bytes.cast::<PyObject>()); println!("resizeafter{}",_n);
         }
     }
 
@@ -63,6 +113,9 @@ impl BytesWriter {
         while self.cap - self.len < len {
             self.cap *= 2;
         }
+        unsafe {
+        let _n: isize = Py_REFCNT(self.bytes.cast::<PyObject>()); println!("resizeingrowbefor{}",_n);
+        };
         self.resize(self.cap as isize);
     }
 }
