@@ -36,7 +36,7 @@ import orjson
 
 # print("I have slept 10s, exit, done!")
 #orjson.dumps()
-#orjson.dumps([])
+orjson.dumps([])
 #  print("I have done!")
 # even have valgrindi with release build
 #valgrind+ python debug _ gc_disable ,but cannot trace extension module when python finaliztion"
