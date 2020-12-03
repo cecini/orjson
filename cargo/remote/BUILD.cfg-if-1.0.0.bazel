@@ -25,23 +25,17 @@ package(default_visibility = [
 ])
 
 licenses([
-    "notice",  # Apache-2.0 from expression "Apache-2.0 OR MIT"
+    "notice",  # MIT from expression "MIT OR Apache-2.0"
 ])
 
 # Generated Targets
 
 rust_library(
-    name = "bytecount",
+    name = "cfg_if",
     srcs = glob(["**/*.rs"]),
-    aliases = {
-        "@raze__packed_simd_2__0_3_4//:packed_simd_2": "packed_simd",
-    },
     crate_features = [
-        "generic-simd",
-        "packed_simd",
-        "runtime-dispatch-simd",
     ],
-    crate_root = "bytecount/src/lib.rs",
+    crate_root = "src/lib.rs",
     crate_type = "lib",
     edition = "2018",
     rustc_flags = [
@@ -51,9 +45,10 @@ rust_library(
         "cargo-raze",
         "manual",
     ],
-    version = "0.6.0",
+    version = "1.0.0",
     # buildifier: leave-alone
     deps = [
-        "@raze__packed_simd_2__0_3_4//:packed_simd_2",
     ],
 )
+
+# Unsupported target "xcrate" with type "test" omitted

@@ -36,7 +36,31 @@ import orjson
 
 # print("I have slept 10s, exit, done!")
 #orjson.dumps()
-orjson.dumps([])
+#jsonb = to_json_bytes(input)
+
+jsonb = orjson.dumps({"kind": "beginb"})
+jsonc = orjson.dumps(dict(kind="begin"))
+
+print(jsonb)
+print(jsonc)
+data = {
+    "type": "job",
+    #"created_at": datetime.datetime(1970, 1, 1),
+    "created_at": 1,
+    "status": "🆗",
+    #"payload": numpy.array([[1, 2], [3, 4]]),
+    "payload": 222,
+}
+print(orjson.dumps(data))
+import decimal
+def default(obj):
+    if isinstance(obj, decimal.Decimal):
+        return str(obj)
+
+print(orjson.dumps({"set":{1, 2}}, default=default))
+print(orjson.dumps({"a": "b", "c": {"d": True}, "e": [1, 2]}))
+#b'{"a":"b","c":{"d":true},"e":[1,2]}'
+
 #  print("I have done!")
 # even have valgrindi with release build
 #valgrind+ python debug _ gc_disable ,but cannot trace extension module when python finaliztion"

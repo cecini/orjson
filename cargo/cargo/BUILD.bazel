@@ -23,7 +23,7 @@ alias(
 
 alias(
     name = "bytecount",
-    actual = "@raze__bytecount__0_6_0//:bytecount",
+    actual = "@raze__bytecount__0_6_1//:bytecount",
     tags = [
         "cargo-raze",
         "manual",
@@ -32,7 +32,7 @@ alias(
 
 alias(
     name = "encoding_rs",
-    actual = "@raze__encoding_rs__0_8_24//:encoding_rs",
+    actual = "@raze__encoding_rs__0_8_26//:encoding_rs",
     tags = [
         "cargo-raze",
         "manual",
@@ -41,7 +41,7 @@ alias(
 
 alias(
     name = "inlinable_string",
-    actual = "@raze__inlinable_string__0_1_13//:inlinable_string",
+    actual = "@raze__inlinable_string__0_1_14//:inlinable_string",
     tags = [
         "cargo-raze",
         "manual",
@@ -113,7 +113,7 @@ alias(
 
 alias(
     name = "syn",
-    actual = "@raze__syn__1_0_51//:syn",
+    actual = "@raze__syn__1_0_52//:syn",
     tags = [
         "cargo-raze",
         "manual",

@@ -39,12 +39,12 @@ def raze_fetch_remote_crates():
     )
 
     maybe(
-        new_git_repository,
-        name = "raze__bytecount__0_6_0",
-        remote = "https://github.com/ijl/orjson.git",
-        commit = "417e40e6fcc3d5203f7e0824074b57a5c6497a49",
-        build_file = Label("//cargo/remote:BUILD.bytecount-0.6.0.bazel"),
-        init_submodules = True,
+        http_archive,
+        name = "raze__bytecount__0_6_1",
+        url = "https://crates.io/api/v1/crates/bytecount/0.6.1/download",
+        type = "tar.gz",
+        strip_prefix = "bytecount-0.6.1",
+        build_file = Label("//cargo/remote:BUILD.bytecount-0.6.1.bazel"),
     )
 
     maybe(
@@ -57,12 +57,21 @@ def raze_fetch_remote_crates():
     )
 
     maybe(
-        new_git_repository,
-        name = "raze__encoding_rs__0_8_24",
-        remote = "https://github.com/ijl/orjson.git",
-        commit = "417e40e6fcc3d5203f7e0824074b57a5c6497a49",
-        build_file = Label("//cargo/remote:BUILD.encoding_rs-0.8.24.bazel"),
-        init_submodules = True,
+        http_archive,
+        name = "raze__cfg_if__1_0_0",
+        url = "https://crates.io/api/v1/crates/cfg-if/1.0.0/download",
+        type = "tar.gz",
+        strip_prefix = "cfg-if-1.0.0",
+        build_file = Label("//cargo/remote:BUILD.cfg-if-1.0.0.bazel"),
+    )
+
+    maybe(
+        http_archive,
+        name = "raze__encoding_rs__0_8_26",
+        url = "https://crates.io/api/v1/crates/encoding_rs/0.8.26/download",
+        type = "tar.gz",
+        strip_prefix = "encoding_rs-0.8.26",
+        build_file = Label("//cargo/remote:BUILD.encoding_rs-0.8.26.bazel"),
     )
 
     maybe(
@@ -76,11 +85,11 @@ def raze_fetch_remote_crates():
 
     maybe(
         http_archive,
-        name = "raze__inlinable_string__0_1_13",
-        url = "https://crates.io/api/v1/crates/inlinable_string/0.1.13/download",
+        name = "raze__inlinable_string__0_1_14",
+        url = "https://crates.io/api/v1/crates/inlinable_string/0.1.14/download",
         type = "tar.gz",
-        strip_prefix = "inlinable_string-0.1.13",
-        build_file = Label("//cargo/remote:BUILD.inlinable_string-0.1.13.bazel"),
+        strip_prefix = "inlinable_string-0.1.14",
+        build_file = Label("//cargo/remote:BUILD.inlinable_string-0.1.14.bazel"),
     )
 
     maybe(
@@ -195,7 +204,7 @@ def raze_fetch_remote_crates():
         new_git_repository,
         name = "raze__serde_json__1_0_53",
         remote = "https://github.com/ijl/orjson.git",
-        commit = "417e40e6fcc3d5203f7e0824074b57a5c6497a49",
+        commit = "5538bb62958ac256a4bf0291b7254dace9cd288d",
         build_file = Label("//cargo/remote:BUILD.serde_json-1.0.53.bazel"),
         init_submodules = True,
     )
@@ -220,11 +229,11 @@ def raze_fetch_remote_crates():
 
     maybe(
         http_archive,
-        name = "raze__syn__1_0_51",
-        url = "https://crates.io/api/v1/crates/syn/1.0.51/download",
+        name = "raze__syn__1_0_52",
+        url = "https://crates.io/api/v1/crates/syn/1.0.52/download",
         type = "tar.gz",
-        strip_prefix = "syn-1.0.51",
-        build_file = Label("//cargo/remote:BUILD.syn-1.0.51.bazel"),
+        strip_prefix = "syn-1.0.52",
+        build_file = Label("//cargo/remote:BUILD.syn-1.0.52.bazel"),
     )
 
     maybe(
