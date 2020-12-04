@@ -69,7 +69,8 @@ impl BytesWriter {
             // (*self.bytes).ob_size = self.len as Py_ssize_t;
             //
             // for py39 this is macro ,so undefined, cannot import,
-         //   Py_SET_SIZE(self.bytes.cast::<PyVarObject>(), self.len as Py_ssize_t);
+            // Py_SET_SIZE(self.bytes.cast::<PyVarObject>(), self.len as Py_ssize_t);
+//            (*self.bytes.cast::<PyVarObject>()).ob_size = self.len as Py_ssize_t;
 
 
             //Py_SIZE(self.bytes.cast::<PyObject>()) = self.len as Py_ssize_t;
