@@ -20,6 +20,7 @@ use std::borrow::Cow;
 use std::os::raw::c_char;
 use std::ptr::NonNull;
 use ::std::intrinsics::breakpoint;
+use std::fmt;
 
 const DUMPS_DOC: &str =
     "dumps(obj, /, default=None, option=None)\n--\n\nSerialize Python objects to JSON.\0";
@@ -39,9 +40,12 @@ macro_rules! opt {
 #[allow(non_snake_case)]
 #[no_mangle]
 #[cold]
+// definece func exposed to c use  
+// the func unsafe meaning return value?, why nest unsafe??
 pub unsafe extern "C" fn PyInit_orjson() -> *mut PyObject {
     let mut init = PyModuleDef_INIT;
     init.m_name = "orjson\0".as_ptr() as *const c_char;
+    // ffi func call 
     let mptr = PyModule_Create(Box::into_raw(Box::new(init)));
 
     let version = env!("CARGO_PKG_VERSION");
@@ -71,6 +75,7 @@ pub unsafe extern "C" fn PyInit_orjson() -> *mut PyObject {
     {
         wrapped_dumps = PyMethodDef {
             ml_name: "dumps\0".as_ptr() as *const c_char,
+            // converse dumps type to PyCFunction
             ml_meth: Some(unsafe {
                 std::mem::transmute::<PyCFunctionWithKeywords, PyCFunction>(dumps)
             }),
@@ -137,6 +142,7 @@ pub unsafe extern "C" fn PyInit_orjson() -> *mut PyObject {
     opt!(mptr, "OPT_STRICT_INTEGER\0", opt::STRICT_INTEGER);
     opt!(mptr, "OPT_UTC_Z\0", opt::UTC_Z);
 
+    // import type import and init 
     typeref::init_typerefs();
 
     unsafe {
@@ -265,6 +271,13 @@ pub unsafe extern "C" fn dumps(
     args: *mut PyObject,
     kwds: *mut PyObject,
 ) -> *mut PyObject {
+    println!("dump dumps(_self; args,for dict, it is tuple;,kwds,args.ob_type.tp_subclasses):");
+    unsafe {
+    _PyObject_Dump(_self);
+    _PyObject_Dump(args);
+    _PyObject_Dump(kwds);
+    _PyObject_Dump((*((*args).ob_type)).tp_subclasses);
+    }
     let mut default: Option<NonNull<PyObject>> = None;
     let mut optsptr: Option<NonNull<PyObject>> = None;
 

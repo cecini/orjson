@@ -229,11 +229,11 @@ def raze_fetch_remote_crates():
 
     maybe(
         http_archive,
-        name = "raze__syn__1_0_52",
-        url = "https://crates.io/api/v1/crates/syn/1.0.52/download",
+        name = "raze__syn__1_0_53",
+        url = "https://crates.io/api/v1/crates/syn/1.0.53/download",
         type = "tar.gz",
-        strip_prefix = "syn-1.0.52",
-        build_file = Label("//cargo/remote:BUILD.syn-1.0.52.bazel"),
+        strip_prefix = "syn-1.0.53",
+        build_file = Label("//cargo/remote:BUILD.syn-1.0.53.bazel"),
     )
 
     maybe(

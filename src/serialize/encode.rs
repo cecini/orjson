@@ -21,41 +21,57 @@ use std::io::Write;
 use std::ptr::NonNull;
 use pyo3::ffi::*;
 use std::fmt;
+use std::str;
+use ::std::intrinsics::breakpoint;
 
 pub const RECURSION_LIMIT: u8 = 255;
 
 pub fn serialize(
-    ptr: *mut pyo3::ffi::PyObject,
+    ptr: *mut pyo3::ffi::PyObject,// raw pointer ,not unsafe,from tupleGETITEM, tuple[0]
     default: Option<NonNull<pyo3::ffi::PyObject>>,
     opts: Opt,
 ) -> Result<NonNull<pyo3::ffi::PyObject>, String> {
+    // from local serialize::writer
     let mut buf = BytesWriter::new();
+    println!("in serialize, pyobject item from tuple");
+    unsafe { _PyObject_Dump(ptr);}
     let obtype = pyobject_to_obtype(ptr, opts);
-    unsafe { let _n: isize = Py_REFCNT(buf.bytes.cast::<PyObject>()); println!("beforebufresize{}",_n);}
+    // primite tyep raw pointer ,so have cast, PyBytesObject now  
+    // Py_REFCNT is rust func, not c interface 
+    // unsafe { let _n: isize = Py_REFCNT(buf.bytes.cast::<PyObject>()); println!("beforebufresize{}",_n);}
     match obtype {
         ObType::List | ObType::Dict | ObType::Dataclass | ObType::NumpyArray => {
             buf.resize(1024);
         }
         _ => {}
     }
-    unsafe { let _n: isize = Py_REFCNT(buf.bytes.cast::<PyObject>()); println!("afterbufresizeandbeforebufprefetch{}",_n);}
-    buf.prefetch();
-    unsafe { let _n: isize = Py_REFCNT(buf.bytes.cast::<PyObject>()); println!("afterprefetch{}",_n);}
+    // unsafe { let _n: isize = Py_REFCNT(buf.bytes.cast::<PyObject>()); println!("afterbufresizeandbeforebufprefetch{}",_n);}
+    // buf.prefetch();
+    // unsafe { let _n: isize = Py_REFCNT(buf.bytes.cast::<PyObject>()); println!("afterprefetch{}",_n);}
+    
+    //  create type for json 
+    //  size form ptr pyobject
     let obj = PyObjectSerializer::with_obtype(ptr, obtype, opts, 0, 0, default);
-    unsafe { let _n: isize = Py_REFCNT(buf.bytes.cast::<PyObject>()); println!("aftercreateobj{}",_n);}
+    // unsafe { let _n: isize = Py_REFCNT(buf.bytes.cast::<PyObject>()); println!("aftercreateobj{}",_n);}
+    // should wrapper as rust fun ，then call in gdb
+    unsafe { _PyObject_Dump(obj.ptr);}
+    println!("in serialize, have create the PyObjectSerializer obj with  the  pyobject item ,then serde_json write to writerbuf using this obj");
     let res;
     if likely!(opts & INDENT_2 != INDENT_2) {
+        // println!("serde_json's to write buff  {:?}", str::from_utf8(&obj)); 
+        println!("in serialize, write to buf using the PyObjectSerializer obj by serde_json write");
         res = serde_json::to_writer(&mut buf, &obj);
     } else {
+        println!("in serialize, write to buf using the PyObjectSerializer obj by serde_json pretty write");
         res = serde_json::to_writer_pretty(&mut buf, &obj);
     }
-    unsafe { let _n: isize = Py_REFCNT(buf.bytes.cast::<PyObject>()); println!("afterjsonwrite{}",_n);}
+    // unsafe { let _n: isize = Py_REFCNT(buf.bytes.cast::<PyObject>()); println!("afterjsonwrite{}",_n);}
     match res {
         Ok(_) => {
             if opts & APPEND_NEWLINE != 0 {
                 buf.write(b"\n").unwrap();
             }
-            unsafe { let _n: isize = Py_REFCNT(buf.bytes.cast::<PyObject>()); println!("beforebuffinish{}",_n);}
+            // unsafe { let _n: isize = Py_REFCNT(buf.bytes.cast::<PyObject>()); println!("beforebuffinish{}",_n);}
             Ok(buf.finish())
         }
         Err(err) => {
@@ -90,7 +106,9 @@ pub enum ObType {
 #[inline]
 pub fn pyobject_to_obtype(obj: *mut pyo3::ffi::PyObject, opts: Opt) -> ObType {
     unsafe {
+        // where this ob_type macro, src/utils 
         let ob_type = ob_type!(obj);
+        println!("the obj type : {:?}", ob_type);
         if ob_type == STR_TYPE {
             ObType::Str
         } else if ob_type == INT_TYPE {
@@ -216,6 +234,8 @@ impl<'p> Serialize for PyObjectSerializer {
     where
         S: Serializer,
     {
+        println!("obj PyObjectSerializer::Serialize() self.ptr dump!!!{:?}", ob_type!(self.ptr)); 
+        unsafe { _PyObject_Dump(self.ptr);}
         match self.obtype {
             ObType::Str => {
                 let mut str_size: pyo3::ffi::Py_ssize_t = 0;
@@ -241,10 +261,16 @@ impl<'p> Serialize for PyObjectSerializer {
                 if unlikely!(self.recursion == RECURSION_LIMIT) {
                     err!(RECURSION_LIMIT_REACHED)
                 }
-                let len = unsafe { PyDict_GET_SIZE(self.ptr) as usize };
+                // unsafe { breakpoint() };
+                let len = unsafe { 
+                    let a =  self.ptr.cast::<pyo3::ffi::PyDictObject>();
+                    PyDict_GET_SIZE(self.ptr) as usize 
+                };
+                println!("dict len: {}", len);
                 if unlikely!(len == 0) {
                     serializer.serialize_map(Some(0)).unwrap().end()
                 } else if likely!(self.opts & SORT_OR_NON_STR_KEYS == 0) {
+                    println!("dict norm new: sort_or_non_str_key and opts == 0");
                     Dict::new(
                         self.ptr,
                         self.opts,
@@ -255,6 +281,7 @@ impl<'p> Serialize for PyObjectSerializer {
                     )
                     .serialize(serializer)
                 } else if self.opts & NON_STR_KEYS != 0 {
+                    println!("dict non_str_key new");
                     DictNonStrKey::new(
                         self.ptr,
                         self.opts,
@@ -265,6 +292,7 @@ impl<'p> Serialize for PyObjectSerializer {
                     )
                     .serialize(serializer)
                 } else {
+                    println!("dict sortedkey new");
                     DictSortedKey::new(
                         self.ptr,
                         self.opts,

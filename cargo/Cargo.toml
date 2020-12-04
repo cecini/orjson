@@ -45,19 +45,21 @@ encoding_rs = { version = "0.8", default_features = false }
 inlinable_string = { version = "0.1" }
 
 # itoa = { version = "0.4", default_features = false }
-itoa = { version = "0.4", default_features = true, features = ["std", "i128"] }
+ itoa = { version = "0.4", default_features = true, features = ["std", "i128"] }
 
 # once_cell = { version = "1", default_features = false }
-once_cell = { version = "1"}
+# ring need once_cell:sync
+ once_cell = { version = "1"}
 
 #pyo3 = { version = "0.12", default_features = false, features = ["extension-module"]}
 
 ryu = { version = "1" }
 
+# orjson: serde = { version = "1", default_features = false }
 # serde = { version = "1", default_features = false }
-serde = { version = "1", default_features = false, features = ["std", "derive"] }
+ serde = { version = "1", default_features = false, features = ["std", "derive"] }
 
-# serde_json = { path = "./json", default_features = false, features = ["std"] }
+# orjson: serde_json = { path = "./json", default_features = false, features = ["std"] }
 serde_json = { git = "https://github.com/ijl/orjson.git", tag = "3.4.4", default_features = false, features = ["std"]  }
 #serde_json = { version = "1", default_features = false, features = ["std"] }
 

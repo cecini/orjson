@@ -43,6 +43,10 @@ jsonc = orjson.dumps(dict(kind="begin"))
 
 print(jsonb)
 print(jsonc)
+#print(orjson.dumps(dict(kind="begin")))
+#print(orjson.dumps(dict(kind="begin")))
+# print(orjson.dumps(dict(kind="begin")))
+
 data = {
     "type": "job",
     #"created_at": datetime.datetime(1970, 1, 1),
@@ -61,7 +65,7 @@ print(orjson.dumps({"set":{1, 2}}, default=default))
 print(orjson.dumps({"a": "b", "c": {"d": True}, "e": [1, 2]}))
 #b'{"a":"b","c":{"d":true},"e":[1,2]}'
 
-#  print("I have done!")
+print("I have done!")
 # even have valgrindi with release build
 #valgrind+ python debug _ gc_disable ,but cannot trace extension module when python finaliztion"
 # valgrind _ python release, so use ndebug ,now no pyhont finaliztion faild, but the extension module leak cannot find. why

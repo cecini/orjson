@@ -113,7 +113,7 @@ alias(
 
 alias(
     name = "syn",
-    actual = "@raze__syn__1_0_52//:syn",
+    actual = "@raze__syn__1_0_53//:syn",
     tags = [
         "cargo-raze",
         "manual",

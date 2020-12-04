@@ -186,6 +186,7 @@ unsafe fn look_up_enum_type() -> *mut PyTypeObject {
 }
 
 #[cold]
+// unsaft will can unsafet code ,so .
 unsafe fn look_up_uuid_type() -> *mut PyTypeObject {
     let uuid_mod = PyImport_ImportModule("uuid\0".as_ptr() as *const c_char);
     let uuid_mod_dict = PyObject_GenericGetDict(uuid_mod, std::ptr::null_mut());

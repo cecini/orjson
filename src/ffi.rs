@@ -2,6 +2,8 @@
 
 use pyo3::ffi::*;
 use std::os::raw::c_char;
+use std::ffi::c_void;
+// also in the os::raw ,why 
 
 pub type _PyCFunctionFastWithKeywords = unsafe extern "C" fn(
     slf: *mut PyObject,
@@ -23,6 +25,7 @@ pub struct LocalPyTypeObject {
 #[allow(non_snake_case)]
 #[inline(always)]
 pub unsafe fn PyDict_GET_SIZE(op: *mut PyObject) -> Py_ssize_t {
+    // (*op.cast::<pyo3::ffi::PyDictObject>()).ma_used
     (*op.cast::<PyDictObject>()).ma_used
 }
 
@@ -44,3 +47,6 @@ pub unsafe fn PyBytes_AS_STRING(op: *mut PyObject) -> *const c_char {
 pub unsafe fn PyBytes_GET_SIZE(op: *mut PyObject) -> Py_ssize_t {
     (*op.cast::<PyVarObject>()).ob_size
 }
+//extern "C" {
+//    pub fn Py_SET_SIZE(arg1: *mut PyVarObject, arg2: Py_ssize_t) -> c_void;
+// }

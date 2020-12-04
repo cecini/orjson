@@ -5,6 +5,11 @@ macro_rules! is_type {
         unsafe { $obj_ptr == $type_ptr }
     };
 }
+//macro_rules! set_size {
+//    ($obj_ptr:expr, $type_ptr:expr) => {
+//        unsafe { $obj_ptr == $type_ptr }
+//    };
+//}
 
 macro_rules! ob_type {
     ($obj:expr) => {
