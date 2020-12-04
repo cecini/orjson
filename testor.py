@@ -63,8 +63,12 @@ def default(obj):
 
 print(orjson.dumps({"set":{1, 2}}, default=default))
 print(orjson.dumps({"a": "b", "c": {"d": True}, "e": [1, 2]}))
+#orjson.loads(_)
+#orjson.loads('"\\ud800"')
 #b'{"a":"b","c":{"d":true},"e":[1,2]}'
 
+print(orjson.loads(b'"\xed\xa0\x80"'.decode("utf-8", "replace")))
+print(orjson.loads("{}\n\t "))
 print("I have done!")
 # even have valgrindi with release build
 #valgrind+ python debug _ gc_disable ,but cannot trace extension module when python finaliztion"
