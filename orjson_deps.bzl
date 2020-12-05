@@ -21,9 +21,9 @@ def orjson_deps():
     maybe(
         git_repository,
         name = "io_bazel_rules_rust",
-        commit = "504cde54248f518d5c98eb9f1e8db3546904ecb2",
+        commit = "18608544c831f6c999f216bb23ca52cf97c04480",
         remote = "https://github.com/ankitects/rules_rust",
-        shallow_since = "1606199575 +1000",
+        shallow_since = "1606951450 +1000",
     )
 
     maybe(

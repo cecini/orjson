@@ -15,7 +15,7 @@ def setup_deps():
     rust_repositories(
             edition = "2018",
             version = "nightly",
- 	    iso_date = "2020-10-24",
+ 	    iso_date = "2020-11-25",
     )
     bazel_version(name = "bazel_version")
 
