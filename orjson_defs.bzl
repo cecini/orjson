@@ -1,6 +1,6 @@
-load("@io_bazel_rules_rust//:workspace.bzl", "bazel_version")
+#load("@io_bazel_rules_rust//:workspace.bzl", "bazel_version")
 load("@io_bazel_rules_rust//rust:repositories.bzl", "rust_repositories")
-load("@io_bazel_rules_rust//:workspace.bzl", "rust_workspace")
+#load("@io_bazel_rules_rust//:workspace.bzl", "rust_workspace")
 load("@rules_pyo3_repo//cargo:crates.bzl", "rules_pyo3_fetch_remote_crates")
 #load("@//cargo:crates.bzl", "raze_fetch_remote_crates")
 #load("@orjson_repo//cargo:crates.bzl", orjson_fetch_remote_crates = "raze_fetch_remote_crates")
@@ -17,9 +17,9 @@ def setup_deps():
             version = "nightly",
  	    iso_date = "2020-11-25",
     )
-    bazel_version(name = "bazel_version")
+ #   bazel_version(name = "bazel_version")
 
-    rust_workspace()
+    #rust_workspace()
 
     rules_pyo3_fetch_remote_crates()
 
