@@ -6,17 +6,18 @@ load("@rules_pyo3_repo//cargo:crates.bzl", "rules_pyo3_fetch_remote_crates")
 #load("@orjson_repo//cargo:crates.bzl", orjson_fetch_remote_crates = "raze_fetch_remote_crates")
 load("@orjson_repo//cargo:crates.bzl",  "raze_fetch_remote_crates")
 #use the python.bzl in the rules_pyo3_repo
-load("@rules_pyo3_repo//:python.bzl", "setup_local_python")
+#load("@rules_pyo3_repo//:python.bzl", "setup_local_python")
+load("@toolchains//:python.bzl", "setup_local_python")
 load("@rules_python//python:pip.bzl", "pip_install")
 #load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 #load("@bazel_tools//tools/build_defs/repo:git.bzl", "git_repository", "new_git_repository")
+
+load("@toolchains//:toolchains_deps.bzl", toolchains_deps = "toolchains_deps")
+load("@toolchains//:toolchains_defs.bzl", toolchains_setup_debugdeps = "setup_debugdeps", toolchains_setup_releasedeps = "setup_releasedeps")
 def setup_deps():
-    # rust library so need rust
-    rust_repositories(
-            edition = "2018",
-            version = "nightly",
- 	    iso_date = "2020-11-25",
-    )
+    toolchains_deps()
+    toolchains_setup_debugdeps()
+
  #   bazel_version(name = "bazel_version")
 
     #rust_workspace()
@@ -25,10 +26,6 @@ def setup_deps():
 
     raze_fetch_remote_crates()
 
-    # this repo should be in a external repo 
-    # such as on anki or new repo 
-    setup_local_python(name = "python")
-    native.register_toolchains("@python//:python3_toolchain")
 
     pip_install(   # or pip3_import
         name = "debug_deps",

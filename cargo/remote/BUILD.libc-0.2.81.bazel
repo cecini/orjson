@@ -36,14 +36,11 @@ load(
 )
 
 cargo_build_script(
-    name = "serde_build_script",
+    name = "libc_build_script",
     srcs = glob(["**/*.rs"]),
     build_script_env = {
     },
     crate_features = [
-        "derive",
-        "serde_derive",
-        "std",
     ],
     crate_root = "build.rs",
     data = glob(["**"]),
@@ -55,26 +52,21 @@ cargo_build_script(
         "cargo-raze",
         "manual",
     ],
-    version = "1.0.117",
+    version = "0.2.81",
     visibility = ["//visibility:private"],
     deps = [
     ],
 )
 
 rust_library(
-    name = "serde",
+    name = "libc",
     srcs = glob(["**/*.rs"]),
     crate_features = [
-        "derive",
-        "serde_derive",
-        "std",
     ],
     crate_root = "src/lib.rs",
     crate_type = "lib",
+    data = [],
     edition = "2015",
-    proc_macro_deps = [
-        "@raze__serde_derive__1_0_117//:serde_derive",
-    ],
     rustc_flags = [
         "--cap-lints=allow",
     ],
@@ -82,9 +74,11 @@ rust_library(
         "cargo-raze",
         "manual",
     ],
-    version = "1.0.117",
+    version = "0.2.81",
     # buildifier: leave-alone
     deps = [
-        ":serde_build_script",
+        ":libc_build_script",
     ],
 )
+
+# Unsupported target "const_fn" with type "test" omitted

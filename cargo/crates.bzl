@@ -40,11 +40,11 @@ def raze_fetch_remote_crates():
 
     maybe(
         http_archive,
-        name = "raze__bytecount__0_6_1",
-        url = "https://crates.io/api/v1/crates/bytecount/0.6.1/download",
+        name = "raze__bytecount__0_6_2",
+        url = "https://crates.io/api/v1/crates/bytecount/0.6.2/download",
         type = "tar.gz",
-        strip_prefix = "bytecount-0.6.1",
-        build_file = Label("//cargo/remote:BUILD.bytecount-0.6.1.bazel"),
+        strip_prefix = "bytecount-0.6.2",
+        build_file = Label("//cargo/remote:BUILD.bytecount-0.6.2.bazel"),
     )
 
     maybe(
@@ -112,11 +112,11 @@ def raze_fetch_remote_crates():
 
     maybe(
         http_archive,
-        name = "raze__libc__0_2_80",
-        url = "https://crates.io/api/v1/crates/libc/0.2.80/download",
+        name = "raze__libc__0_2_81",
+        url = "https://crates.io/api/v1/crates/libc/0.2.81/download",
         type = "tar.gz",
-        strip_prefix = "libc-0.2.80",
-        build_file = Label("//cargo/remote:BUILD.libc-0.2.80.bazel"),
+        strip_prefix = "libc-0.2.81",
+        build_file = Label("//cargo/remote:BUILD.libc-0.2.81.bazel"),
     )
 
     maybe(
@@ -184,20 +184,20 @@ def raze_fetch_remote_crates():
 
     maybe(
         http_archive,
-        name = "raze__serde__1_0_117",
-        url = "https://crates.io/api/v1/crates/serde/1.0.117/download",
+        name = "raze__serde__1_0_118",
+        url = "https://crates.io/api/v1/crates/serde/1.0.118/download",
         type = "tar.gz",
-        strip_prefix = "serde-1.0.117",
-        build_file = Label("//cargo/remote:BUILD.serde-1.0.117.bazel"),
+        strip_prefix = "serde-1.0.118",
+        build_file = Label("//cargo/remote:BUILD.serde-1.0.118.bazel"),
     )
 
     maybe(
         http_archive,
-        name = "raze__serde_derive__1_0_117",
-        url = "https://crates.io/api/v1/crates/serde_derive/1.0.117/download",
+        name = "raze__serde_derive__1_0_118",
+        url = "https://crates.io/api/v1/crates/serde_derive/1.0.118/download",
         type = "tar.gz",
-        strip_prefix = "serde_derive-1.0.117",
-        build_file = Label("//cargo/remote:BUILD.serde_derive-1.0.117.bazel"),
+        strip_prefix = "serde_derive-1.0.118",
+        build_file = Label("//cargo/remote:BUILD.serde_derive-1.0.118.bazel"),
     )
 
     maybe(
@@ -211,11 +211,11 @@ def raze_fetch_remote_crates():
 
     maybe(
         http_archive,
-        name = "raze__smallvec__1_5_0",
-        url = "https://crates.io/api/v1/crates/smallvec/1.5.0/download",
+        name = "raze__smallvec__1_5_1",
+        url = "https://crates.io/api/v1/crates/smallvec/1.5.1/download",
         type = "tar.gz",
-        strip_prefix = "smallvec-1.5.0",
-        build_file = Label("//cargo/remote:BUILD.smallvec-1.5.0.bazel"),
+        strip_prefix = "smallvec-1.5.1",
+        build_file = Label("//cargo/remote:BUILD.smallvec-1.5.1.bazel"),
     )
 
     maybe(
@@ -229,11 +229,11 @@ def raze_fetch_remote_crates():
 
     maybe(
         http_archive,
-        name = "raze__syn__1_0_53",
-        url = "https://crates.io/api/v1/crates/syn/1.0.53/download",
+        name = "raze__syn__1_0_54",
+        url = "https://crates.io/api/v1/crates/syn/1.0.54/download",
         type = "tar.gz",
-        strip_prefix = "syn-1.0.53",
-        build_file = Label("//cargo/remote:BUILD.syn-1.0.53.bazel"),
+        strip_prefix = "syn-1.0.54",
+        build_file = Label("//cargo/remote:BUILD.syn-1.0.54.bazel"),
     )
 
     maybe(
