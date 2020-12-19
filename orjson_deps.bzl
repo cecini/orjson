@@ -49,7 +49,7 @@ def orjson_deps():
     maybe(
         git_repository,
         name = "rules_pyo3_repo",
-        commit = "751c7f7ee9141d798c44f42b3c57c1d6e4139f5b",
+        commit = "4a39ecbab67cf4e2e90a360fc688ed6ea9d35877",
         remote = "https://github.com/cecini/rules_pyo3",
     )
 
