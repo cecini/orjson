@@ -38,7 +38,7 @@ default_gen_buildrs = true
 [dependencies]
 rand_core = { version = "0.5", features = ["std"] } 
 associative-cache = { version = "1" }
-bytecount = { version = "0.6", default_features = false, features = ["generic-simd", "runtime-dispatch-simd"] }
+bytecount = { version = "0.6.2", default_features = false, features = ["generic-simd", "runtime-dispatch-simd"] }
 
 #reqwest = { git = "https://github.com/ankitects/reqwest.git", tag = "anki-2020-11-03", default-features = false, features = ["json", "socks"] }
 encoding_rs = { version = "0.8", default_features = false }
@@ -62,7 +62,7 @@ ryu = { version = "1" }
  serde = { version = "1", default_features = false, features = ["std", "derive"] }
 
 # orjson: serde_json = { path = "./json", default_features = false, features = ["std"] }
-serde_json = { git = "https://github.com/ijl/orjson.git", tag = "3.4.4", default_features = false, features = ["std"]  }
+serde_json = { git = "https://github.com/ijl/orjson.git", tag = "3.4.6", default_features = false, features = ["std"]  }
 #serde_json = { version = "1", default_features = false, features = ["std"] }
 
 smallvec = { version = "1", default_features = false, features = ["const_generics", "union", "specialization", "write"] }

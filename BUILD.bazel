@@ -50,7 +50,7 @@ pyo3_extension(
     # ofcouse  
     crate_root = "src/lib.rs",
     edition = "2018",
-    version="3.4.3",
+    version="3.4.6",
     #rustc_flags = ["-C codegen-units=256", 
     rustc_flags = ["-Ccodegen-units=256", 
 		   "-Cdebug-assertions=yes",

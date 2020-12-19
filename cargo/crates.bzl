@@ -204,7 +204,7 @@ def raze_fetch_remote_crates():
         new_git_repository,
         name = "raze__serde_json__1_0_53",
         remote = "https://github.com/ijl/orjson.git",
-        commit = "5538bb62958ac256a4bf0291b7254dace9cd288d",
+        commit = "378af2cffcb1fd4fc3371e39bd879ef4186e5739",
         build_file = Label("//cargo/remote:BUILD.serde_json-1.0.53.bazel"),
         init_submodules = True,
     )
