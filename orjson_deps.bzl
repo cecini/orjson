@@ -29,7 +29,7 @@ def orjson_deps():
     maybe(
         git_repository,
         name = "toolchains",
-	commit = "552e905fd99df3f24fe0b2ccc52ffe4d83465fac",
+	commit = "036eb1bee43572d9d20f3b3d5dedb322bf1f2805",
         remote = "https://github.com/cecini/toolchains.git",
 	shallow_since = "1608361362 +0000"
     )
