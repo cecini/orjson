@@ -7,7 +7,7 @@ load("@rules_pyo3_repo//cargo:crates.bzl", "rules_pyo3_fetch_remote_crates")
 load("@orjson_repo//cargo:crates.bzl",  "raze_fetch_remote_crates")
 #use the python.bzl in the rules_pyo3_repo
 #load("@rules_pyo3_repo//:python.bzl", "setup_local_python")
-load("@toolchains//:python.bzl", "setup_local_python")
+#load("@toolchains//:python.bzl", "setup_local_python")
 load("@rules_python//python:pip.bzl", "pip_install")
 #load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 #load("@bazel_tools//tools/build_defs/repo:git.bzl", "git_repository", "new_git_repository")
